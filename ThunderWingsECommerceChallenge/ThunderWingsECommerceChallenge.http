@@ -1,0 +1,6 @@
+@ThunderWingsECommerceChallenge_HostAddress = http://localhost:5097
+
+GET {{ThunderWingsECommerceChallenge_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
