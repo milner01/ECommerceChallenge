@@ -5,8 +5,8 @@ public record GetAllAircraftsDto(
     string Manufacturer,
     string Country,
     string Role,
-    int TopSpeed,
-    decimal Price,
-    int PageNumber,
-    int PageSize);
+    int? TopSpeed,
+    decimal? Price,
+    int PageNumber = 1,
+    int PageSize = 10);
 
