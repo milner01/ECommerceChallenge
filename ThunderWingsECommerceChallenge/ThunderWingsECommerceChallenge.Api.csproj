@@ -18,9 +18,4 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="src\Core\Checkout\Commands\" />
-    <Folder Include="src\Core\Checkout\Queries\" />
-  </ItemGroup>
-
 </Project>

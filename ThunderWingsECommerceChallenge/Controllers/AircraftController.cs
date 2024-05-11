@@ -11,7 +11,6 @@ namespace ThunderWingsECommerceChallenge.Api.Controllers;
 [Route("[controller]")]
 public class AircraftController : ApiController
 {
-
     [HttpPost("")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

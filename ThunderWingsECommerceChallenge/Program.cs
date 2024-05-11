@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using ThunderWingsECommerceChallenge;
 using ThunderWingsECommerceChallenge.Api.HealthChecks;
 using ThunderWingsECommerceChallenge.Models;
-using ThunderWingsECommerceChallenge.Services.AircraftService;
-using ThunderWingsECommerceChallenge.Services.Checkout;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +23,6 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 // Add DbContext with in-memory database
 builder.Services.AddDbContext<ThunderWingsDatabaseContext>(options =>
     options.UseInMemoryDatabase(databaseName: "ThunderWingsECommerceDatabase"));
-
-// Add services
-builder.Services.AddScoped<IAircraftService, AircraftService>();
-builder.Services.AddScoped<ICheckoutService, CheckoutService>();
 
 var app = builder.Build();
 

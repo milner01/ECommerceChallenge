@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ThunderWingsECommerceChallenge.Models;
 
+
 namespace ThunderWingsECommerceChallenge.Api.src.Core.Aircraft.Commands;
 
 public class CreateAircraftCommand : IRequest<int>
@@ -33,10 +34,10 @@ public class CreateAircraftCommandHandler : IRequestHandler<CreateAircraftComman
             topSpeed: request.TopSpeed,
             price: request.Price);
 
-        // add async to the database
+        // add to the database
         await _dbContext.AddAsync(aircraft);
 
-        // save async to the database
+        // save entity  to the database
         await _dbContext.SaveChangesAsync(cancellationToken);
 
         // return the newly created id

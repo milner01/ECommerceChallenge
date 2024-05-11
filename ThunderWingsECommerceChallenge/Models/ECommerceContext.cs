@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThunderWingsECommerceChallenge.Services.Checkout;
 
 namespace ThunderWingsECommerceChallenge.Models;
 

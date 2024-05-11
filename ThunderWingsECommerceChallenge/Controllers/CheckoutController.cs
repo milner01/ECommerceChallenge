@@ -1,71 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ThunderWingsECommerceChallenge.CustomExceptions;
+using ThunderWingsECommerceChallenge.Api.src.Core.Checkout.Commands;
 using ThunderWingsECommerceChallenge.Models;
-using ThunderWingsECommerceChallenge.Services.Checkout;
 
 namespace ThunderWingsECommerceChallenge.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CheckoutController : ControllerBase
+public class CheckoutController : ApiController
 {
-    private readonly ICheckoutService _checkoutService;
-
-    public CheckoutController(ICheckoutService checkoutService)
-    {
-        _checkoutService = checkoutService;
-    }
-
-    [HttpPost("addToBasket")]
+    [HttpPost("add")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> AddToBasket([FromBody] Basket basketItem)
+    public async Task<ActionResult<int>> AddItemToBasket([FromBody] AddItemToBasketCommand request)
     {
-        var response = await _checkoutService.AddToBasket(basketItem);
-
-        return response ? Ok(response) : BadRequest("Unable To Add To Basket.");
+        return await QueryActionResult<AddItemToBasketCommand, int>(request);
     }
 
-    [HttpGet]
+    [HttpDelete("remove/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpGet("basketItems")]
-    public async Task<IActionResult> GetBasketItems()
+    public async Task<ActionResult<bool?>> RemoveItemFromBasket(int basketItemId)
     {
-        var response = await _checkoutService.GetBasketItems()
-            ?? throw new NotFoundException($"Error: Unable To Find Your Basket Items.");
-
-        return Ok(response);
-    }
-
-    [HttpDelete("removeFromBasket/{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> RemoveFromBasket(int basketItemId)
-    {
-        var response = await _checkoutService.RemoveFromBasket(basketItemId)
-            ?? throw new NotFoundException($"Error: Unable To Find {basketItemId}.");
-
-        return Ok(response);
-    }
-
-    [HttpDelete("cleaBasket")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> ClearBasket()
-    {
-        var response = await _checkoutService.ClearBasket();
-
-        return response ? Ok(response) : BadRequest("Unable To Clear Basket.");
+        return await QueryActionResult<RemoveItemFromBasketCommand, bool?>(query: new RemoveItemFromBasketCommand { BasketItemId = basketItemId });
     }
 
     [HttpPost("process")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> ProcessCheckout()
+    public async Task<ActionResult<Order>> CheckoutBasket()
     {
-        await _checkoutService.ProcessCheckout();
-        return Ok("Checkout successful. Order confirmation sent.");
+        return await QueryActionResult<CheckoutBasketCommand, Order>(query: new CheckoutBasketCommand());
     }
 
 }
