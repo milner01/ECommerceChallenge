@@ -11,11 +11,11 @@ public class AircraftServiceTests
     public async Task GetAircraftById_ReturnsCorrectAircraft_WhenAircraftsAreAdded()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "GetAircraftTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var aircraftService = new AircraftService(options);
 
         // Add aircrafts to database
@@ -40,11 +40,11 @@ public class AircraftServiceTests
     public async Task AddAircraft_ReturnsTrue_WhenAircraftIsAdded()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "AddAircraftTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var aircraftService = new AircraftService(options);
 
         // Add aircrafts to database
@@ -63,11 +63,11 @@ public class AircraftServiceTests
     public async Task DeleteAircraft_ReturnsTrue_WhenAircraftIsDeleted()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "DeleteAircraftTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var aircraftService = new AircraftService(options);
 
         // Add aircrafts to database
@@ -88,11 +88,11 @@ public class AircraftServiceTests
     public async Task UpdateAircraft_ReturnsUpdatedValue_WhenAircraftIsUpdated()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "DeleteAircraftTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var aircraftService = new AircraftService(options);
 
         // Add aircrafts to database

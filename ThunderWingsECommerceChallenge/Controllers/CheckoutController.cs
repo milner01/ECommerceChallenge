@@ -3,7 +3,7 @@ using ThunderWingsECommerceChallenge.CustomExceptions;
 using ThunderWingsECommerceChallenge.Models;
 using ThunderWingsECommerceChallenge.Services.Checkout;
 
-namespace ThunderWingsECommerceChallenge.Controllers.Checkout;
+namespace ThunderWingsECommerceChallenge.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -45,7 +45,7 @@ public class CheckoutController : ControllerBase
     {
         var response = await _checkoutService.RemoveFromBasket(basketItemId)
             ?? throw new NotFoundException($"Error: Unable To Find {basketItemId}.");
-        
+
         return Ok(response);
     }
 

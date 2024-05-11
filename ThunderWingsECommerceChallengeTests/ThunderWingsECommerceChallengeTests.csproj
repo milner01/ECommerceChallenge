@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThunderWingsECommerceChallenge\ThunderWingsECommerceChallenge.csproj" />
+    <ProjectReference Include="..\ThunderWingsECommerceChallenge\ThunderWingsECommerceChallenge.Api.csproj" />
   </ItemGroup>
 
 </Project>

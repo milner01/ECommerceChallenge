@@ -4,7 +4,7 @@ namespace ThunderWingsECommerceChallenge;
 
 public static class SeedData
 {
-    public static void Initialize(ECommerceContext context)
+    public static void Initialize(ThunderWingsDatabaseContext context)
     {
         // Seed your data here
         var aircrafts = new List<Aircraft>

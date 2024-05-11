@@ -11,11 +11,11 @@ public class CheckoutServiceTests
     public async Task AddToBasket_IncludesCorrectItemCount_WhenItemsAreSucessfullyAdded()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "AddToBasketTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var checkoutService = new CheckoutService(options);
 
         var basketItem = new Basket()
@@ -40,11 +40,11 @@ public class CheckoutServiceTests
     public async Task ClearBasket_IncludesCorrectItemCount_WhenBasketIsCleared()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "ClearBasketTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var checkoutService = new CheckoutService(options);
 
         var basketItem = new Basket()
@@ -72,11 +72,11 @@ public class CheckoutServiceTests
     public async Task RemoveFromBasket_IncludesCorrectItemCount_WhenItemIsRemoved()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<ECommerceContext>()
+        var options = new DbContextOptionsBuilder<ThunderWingsDatabaseContext>()
             .UseInMemoryDatabase(databaseName: "RemoveFromBasketTest1")
             .Options;
 
-        var context = new ECommerceContext(options);
+        var context = new ThunderWingsDatabaseContext(options);
         var checkoutService = new CheckoutService(options);
 
         var basketItem = new Basket()

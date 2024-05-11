@@ -5,10 +5,10 @@ namespace ThunderWingsECommerceChallenge.Services.Checkout;
 
 public class CheckoutService : ICheckoutService
 {
-    private readonly ECommerceContext _context;
-    public CheckoutService(DbContextOptions<ECommerceContext> options)
+    private readonly ThunderWingsDatabaseContext _context;
+    public CheckoutService(DbContextOptions<ThunderWingsDatabaseContext> options)
     {
-        _context = new ECommerceContext(options);
+        _context = new ThunderWingsDatabaseContext(options);
     }
 
     public async Task<bool> AddToBasket(Basket basketItem)
