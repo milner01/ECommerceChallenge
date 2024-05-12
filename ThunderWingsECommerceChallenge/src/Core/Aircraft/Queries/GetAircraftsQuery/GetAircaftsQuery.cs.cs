@@ -8,14 +8,14 @@ namespace ThunderWingsECommerceChallenge.Api.src.Core.Aircraft.Queries.GetAircra
 
 public class GetAircaftsQuery : IRequest<GetAircraftsQueryVm>
 {
-    public string Name { get; set; }
-    public string Manufacturer { get; set; }
-    public string Country { get; set; }
-    public string Role { get; set; }
+    public string? Name { get; set; }
+    public string? Manufacturer { get; set; }
+    public string? Country { get; set; }
+    public string? Role { get; set; }
     public int? TopSpeed { get; set; }
     public decimal? Price { get; set; }
-    public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = 10;
+    public int? PageNumber { get; set; } = 1;
+    public int? PageSize { get; set; } = 10;
 }
 
 public class GetAircaftsQueryHandler : IRequestHandler<GetAircaftsQuery, GetAircraftsQueryVm>
@@ -57,19 +57,11 @@ public class GetAircaftsQueryHandler : IRequestHandler<GetAircaftsQuery, GetAirc
         return aircraftsVm;
     }
 
-    private static async Task<List<Models.Aircraft>> PaginateQuery(int pageNumber, int pageSize, IQueryable<Models.Aircraft> query)
-    {
-        return await query
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
-    }
-
     private static IQueryable<Models.Aircraft> FilterByName(string name, IQueryable<Models.Aircraft> query)
     {
         if (!string.IsNullOrWhiteSpace(name))
         {
-            query = query.Where(a => a.Name == name);
+            query = query.Where(a => a.Name.ToLower().Contains(name.ToLower()));
         }
 
         return query;
@@ -79,7 +71,7 @@ public class GetAircaftsQueryHandler : IRequestHandler<GetAircaftsQuery, GetAirc
     {
         if (!string.IsNullOrWhiteSpace(manufacturer))
         {
-            query = query.Where(a => a.Manufacturer == manufacturer);
+            query = query.Where(a => a.Manufacturer.ToLower().Contains(manufacturer.ToLower()));
         }
 
         return query;
@@ -89,7 +81,7 @@ public class GetAircaftsQueryHandler : IRequestHandler<GetAircaftsQuery, GetAirc
     {
         if (!string.IsNullOrWhiteSpace(country))
         {
-            query = query.Where(a => a.Country == country);
+            query = query.Where(a => a.Country.ToLower().Contains(country.ToLower()));
         }
 
         return query;
@@ -100,7 +92,7 @@ public class GetAircaftsQueryHandler : IRequestHandler<GetAircaftsQuery, GetAirc
     {
         if (!string.IsNullOrWhiteSpace(role))
         {
-            query = query.Where(a => a.Role == role);
+            query = query.Where(a => a.Role.ToLower().Contains(role.ToLower()));
         }
 
         return query;
@@ -124,5 +116,13 @@ public class GetAircaftsQueryHandler : IRequestHandler<GetAircaftsQuery, GetAirc
         }
 
         return query;
+    }
+
+    private static async Task<List<Models.Aircraft>> PaginateQuery(int? pageNumber, int? pageSize, IQueryable<Models.Aircraft> query)
+    {
+        return await query
+            .Skip((int)(pageNumber - 1) * (int)pageSize)
+            .Take((int)pageSize)
+            .ToListAsync();
     }
 }

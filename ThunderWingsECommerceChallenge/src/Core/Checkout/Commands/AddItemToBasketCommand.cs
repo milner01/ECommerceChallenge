@@ -3,26 +3,27 @@ using ThunderWingsECommerceChallenge.Models;
 
 namespace ThunderWingsECommerceChallenge.Api.src.Core.Checkout.Commands;
 
-public class AddItemToBasketCommand : IRequest<int>
+public class AddItemToBasketCommand : IRequest<List<int>>
 {
     public Basket BasketItem { get; set; }
 }
 
-public class AddItemToBasketCommandHandler : IRequestHandler<AddItemToBasketCommand, int>
+public class AddItemToBasketCommandHandler : IRequestHandler<AddItemToBasketCommand, List<int>>
 {
     private readonly ThunderWingsDatabaseContext _dbContext;
-
+ 
     public AddItemToBasketCommandHandler(ThunderWingsDatabaseContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<int> Handle(AddItemToBasketCommand request, CancellationToken cancellationToken)
+    public async Task<List<int>> Handle(AddItemToBasketCommand request, CancellationToken cancellationToken)
     {
         // map the domain model
         var basket = new Basket()
         {
-            Aircrafts = request.BasketItem.Aircrafts
+            Aircrafts = request.BasketItem.Aircrafts,
+            UserName = request.BasketItem.UserName
         };
 
         // add the basket item to the database 
@@ -32,6 +33,6 @@ public class AddItemToBasketCommandHandler : IRequestHandler<AddItemToBasketComm
         await _dbContext.SaveChangesAsync(cancellationToken);
 
         // return the newly created id for the front end
-        return basket.Id;
+        return basket.Aircrafts.Select(a => a.Id).ToList();
     }
 }

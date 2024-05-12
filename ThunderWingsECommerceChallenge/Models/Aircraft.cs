@@ -1,8 +1,11 @@
-﻿namespace ThunderWingsECommerceChallenge.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ThunderWingsECommerceChallenge.Models;
 
 public class Aircraft
 {
-    public int Id { get; set; }
+    [Key]
+    public int Id { get; private set; }
     public string Name { get; private set; }
     public string Manufacturer { get; private set; }
     public string Country { get; private set; }
@@ -26,7 +29,8 @@ public class Aircraft
         this.Price = price;
     }
 
-    public void UpdateAircraft(string name,
+    public void UpdateAircraft(
+        string name,
         string manufacturer,
         string country,
         string role,
@@ -40,4 +44,5 @@ public class Aircraft
         this.TopSpeed = topSpeed;
         this.Price = price;
     }
+
 }

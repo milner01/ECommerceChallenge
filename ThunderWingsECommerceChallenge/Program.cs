@@ -24,6 +24,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 builder.Services.AddDbContext<ThunderWingsDatabaseContext>(options =>
     options.UseInMemoryDatabase(databaseName: "ThunderWingsECommerceDatabase"));
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
 
 // Seed the data

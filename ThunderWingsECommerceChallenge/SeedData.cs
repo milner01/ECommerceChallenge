@@ -32,7 +32,7 @@ public static class SeedData
                new Aircraft("Mikoyan MiG-29", "Mikoyan", "Russia", "Multirole fighter", 2445, 45000000),
                new Aircraft("Chengdu J-9", "Chengdu Aircraft Corporation", "China", "Stealth multirole fighter", 2600, 150000000),
                new Aircraft("Sukhoi Su-30", "Sukhoi", "Russia", "Multirole fighter", 2120, 90000000),
-               new Aircraft("Northrop F-20 Tigershark", "Northrop Corporation", "United States of America", "Lightweight fighter", 2290, 35000000)            // Add more aircraft objects here...
+               new Aircraft("Northrop F-20 Tigershark", "Northrop Corporation", "United States of America", "Lightweight fighter", 2290, 35000000)            
         };
 
         context.Aircraft.AddRange(aircrafts);

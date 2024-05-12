@@ -25,10 +25,13 @@ namespace ThunderWingsECommerceChallenge.Api.src.Core.Checkout.Commands
             // Get the current time
             var timeStamp = DateTime.UtcNow;
 
-            // Get the basket item names 
-
             // Generate the order 
-            var order = new Order(aircrafts, totalPrice, timeStamp);
+            var order = new Order()
+            {
+                BasketItems = aircrafts,
+                TotalPrice = totalPrice,
+                Date = timeStamp
+            };
 
             // Add the order to the database for reference
             await _dbContext.AddAsync(order);
