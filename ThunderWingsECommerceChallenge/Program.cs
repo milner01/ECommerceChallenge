@@ -20,9 +20,15 @@ builder.Services.AddHealthChecks()
 //add mediatr
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-// Add DbContext with in-memory database
+//// Add DbContext with in-memory database
+//builder.Services.AddDbContext<ThunderWingsDatabaseContext>(options =>
+//    options.UseInMemoryDatabase(databaseName: "ThunderWingsECommerceDatabase"));
+
+
+// Add DbContext with SQL Server database
 builder.Services.AddDbContext<ThunderWingsDatabaseContext>(options =>
-    options.UseInMemoryDatabase(databaseName: "ThunderWingsECommerceDatabase"));
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -36,8 +42,11 @@ using (var scope = app.Services.CreateScope())
     // Get Db Context
     var context = services.GetRequiredService<ThunderWingsDatabaseContext>();
 
-    // Check if the database needs to be created
-    context.Database.EnsureCreated();
+    //// Check if the database needs to be created
+    //context.Database.EnsureCreated();
+
+    // Apply pending migrations and create the database if it doesn't exist
+    context.Database.Migrate();
 
     // Seed the data 
     if (!context.Aircraft.Any())

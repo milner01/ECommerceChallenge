@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.ComponentModel.DataAnnotations;
 using ThunderWingsECommerceChallenge.Models;
 
 

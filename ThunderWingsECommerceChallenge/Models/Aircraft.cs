@@ -11,6 +11,7 @@ public class Aircraft
     public string Country { get; private set; }
     public string Role { get; private set; }
     public int TopSpeed { get; private set; }
+    [Range(18, 3)]
     public decimal Price { get; private set; }
 
     public Aircraft(
